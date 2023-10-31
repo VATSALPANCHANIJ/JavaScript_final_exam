@@ -1,0 +1,30 @@
+<!-- w.a javascript program find secound largest element
+
+let arr = [10,2,4,25,23,45,12,75]
+ans = 45 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        let arr = [10, 2, 4, 25, 23, 45, 12, 75, 58]
+        let largest;
+        arr.map((val) => {
+            if (val > largest) {
+                largest = val
+            }
+        })
+        let ans = arr;
+        console.log(ans);
+        console.log(arr[arr.length - 2]);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table border="1">
+        <tr>
+            <th colspan="2">Budget</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" id="price">
+            </td>
+            <td>
+                <button onclick="setBudget()">Set Budget</button>
+            </td>
+        </tr>
+    </table>
+
+    <br><br><br>
+
+    <table border="1">
+        <tr>
+            <th colspan="3">Expenses</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id="expenses">
+            </td>
+            <td>
+                <input type="number" id="expensesPrice">
+            </td>
+            <td>
+                <button onclick="checkAmount()">Check Amount</button>
+            </td>
+        </tr>
+        <tbody id="show_data"></tbody>
+    </table>
+
+    <br><br>
+
+    <table border="1">
+        <tr>
+            <th colspan="2">Balance</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id="balance">
+            </td>
+            <td>
+                <button onclick="checkBalance()">Check Balance</button>
+            </td>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+        function setBudget() {
+            let price = document.getElementById("price").value;
+            localStorage.setItem('price', JSON.stringify(price));
+        }
+
+        function checkAmount() {
+
+       
+            let expenses = document.getElementById("expenses").value;
+            let expensesPrice = parseInt(document.getElementById("expensesPrice").value);
+            let obj = {
+                expenses: expenses,
+                expensesPrice: expensesPrice
+            }
+
+            let expensesArray = JSON.parse(localStorage.getItem('expenses')) || [];
+            expensesArray.push(obj);
+            localStorage.setItem('expenses', JSON.stringify(expensesArray));
+
+            let tbl = "";
+            expensesArray.map((val) => {
+                tbl += `
+                    <tr>
+                        <td>${val.expenses}</td>
+                        <td>${val.expensesPrice}</td>
+                    </tr>
+                `;
+            });
+            document.getElementById('show_data').innerHTML = tbl;
+            document.getElementById('expenses').value = "";
+            document.getElementById('expensesPrice').value = "";
+
+        }
+
+        function checkBalance() {
+            let balance = document.getElementById("balance").value;
+            console.log(balance);
+        }
+    </script>
+</body>
+
+</html>
